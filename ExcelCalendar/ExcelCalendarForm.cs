@@ -22,9 +22,13 @@ namespace ExcelCalendar
 
         }
 
-        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        private void generateExcel_Click(object sender, EventArgs e)
         {
+            SaveFileDialog saveExcel = new SaveFileDialog();
+            saveExcel.Filter = "Excel|*.xls";
+            saveExcel.FilterIndex = 1;
 
+            saveExcel.ShowDialog();
         }
     }
 }

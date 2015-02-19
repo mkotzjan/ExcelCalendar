@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExcelCalendarForm));
             this.generateExcel = new System.Windows.Forms.Button();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.saveExcel = new System.Windows.Forms.SaveFileDialog();
             this.tableLayout.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,17 +39,13 @@
             resources.ApplyResources(this.generateExcel, "generateExcel");
             this.generateExcel.Name = "generateExcel";
             this.generateExcel.UseVisualStyleBackColor = true;
+            this.generateExcel.Click += new System.EventHandler(this.generateExcel_Click);
             // 
             // tableLayout
             // 
             resources.ApplyResources(this.tableLayout, "tableLayout");
             this.tableLayout.Controls.Add(this.generateExcel, 0, 1);
             this.tableLayout.Name = "tableLayout";
-            // 
-            // saveExcel
-            // 
-            resources.ApplyResources(this.saveExcel, "saveExcel");
-            this.saveExcel.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
             // ExcelCalendarForm
             // 
@@ -68,7 +63,6 @@
 
         private System.Windows.Forms.Button generateExcel;
         private System.Windows.Forms.TableLayoutPanel tableLayout;
-        private System.Windows.Forms.SaveFileDialog saveExcel;
     }
 }
 
