@@ -31,6 +31,7 @@ namespace ExcelCalendar
             setTitle(xlWorkSheet);
 
             setMonths(xlWorkSheet);
+            setDatesOfMonth(xlWorkSheet);
 
             xlWorkBook.SaveAs(filePath, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);
@@ -77,5 +78,24 @@ namespace ExcelCalendar
             }
         }
 
+        private static void setDatesOfMonth(Excel.Worksheet xlWorkSheet)
+        {
+            for (int i = 0; i < 12; i++)
+            {
+                int daysCount = System.DateTime.DaysInMonth(Options.year, i + 1);
+                for (int j = 1; j < 32; j++)
+                {
+                    if (j <= daysCount)
+                    {
+                        xlWorkSheet.Cells[2 + j, (i * 4) + 1] = j;
+                    }
+                    else
+                    {
+                        xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 1]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
+                    }
+                }
+                xlWorkSheet.Columns[(i * 4) + 1].AutoFit();
+            }
+        }
     }
 }
