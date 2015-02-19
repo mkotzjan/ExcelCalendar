@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace ExcelCalendar
 {
@@ -32,6 +33,7 @@ namespace ExcelCalendar
 
             setMonths(xlWorkSheet);
             setDatesOfMonth(xlWorkSheet);
+            setNameOfDay(xlWorkSheet);
 
             setBorders(xlWorkSheet);
 
@@ -95,6 +97,27 @@ namespace ExcelCalendar
                     if (j <= daysCount)
                     {
                         xlWorkSheet.Cells[2 + j, (i * 4) + 1] = j;
+                    }
+                    else
+                    {
+                        xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 1]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
+                    }
+                }
+                xlWorkSheet.Columns[(i * 4) + 1].AutoFit();
+            }
+        }
+
+        private static void setNameOfDay(Excel.Worksheet xlWorkSheet)
+        {
+            for (int i = 0; i < 12; i++)
+            {
+                int daysCount = System.DateTime.DaysInMonth(Options.year, i + 1);
+                for (int j = 1; j < 32; j++)
+                {
+                    if (j <= daysCount)
+                    {
+                        DateTime dt = new DateTime(Options.year, i + 1, j);
+                        xlWorkSheet.Cells[2 + j, (i * 4) + 2] = dt.ToString("dddd", DateTimeFormatInfo.CurrentInfo).Substring(0, 2);
                     }
                     else
                     {
