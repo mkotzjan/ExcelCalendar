@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ExcelCalendar
 {
-    class Options
+    static class Options
     {
+        public static int year = System.DateTime.Now.Year;
     }
 }

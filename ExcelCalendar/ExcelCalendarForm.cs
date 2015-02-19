@@ -28,7 +28,15 @@ namespace ExcelCalendar
             saveExcel.Filter = "Excel|*.xls";
             saveExcel.FilterIndex = 1;
 
-            saveExcel.ShowDialog();
+            if(saveExcel.ShowDialog() == DialogResult.OK)
+            {
+                GenerateExcel.generate(saveExcel.FileName);
+            }
+        }
+
+        private void yearUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            Options.year = (int)yearUpDown.Value;
         }
     }
 }

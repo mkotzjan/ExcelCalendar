@@ -46,8 +46,8 @@
             // tableLayout
             // 
             resources.ApplyResources(this.tableLayout, "tableLayout");
-            this.tableLayout.Controls.Add(this.generateExcel, 0, 1);
             this.tableLayout.Controls.Add(this.yearUpDown, 0, 0);
+            this.tableLayout.Controls.Add(this.generateExcel, 0, 1);
             this.tableLayout.Name = "tableLayout";
             // 
             // yearUpDown
@@ -65,10 +65,11 @@
             0});
             this.yearUpDown.Name = "yearUpDown";
             this.yearUpDown.Value = new decimal(new int[] {
-            System.DateTime.Now.Year + 1,
+            Options.year,
             0,
             0,
             0});
+            this.yearUpDown.ValueChanged += new System.EventHandler(this.yearUpDown_ValueChanged);
             // 
             // ExcelCalendarForm
             // 
