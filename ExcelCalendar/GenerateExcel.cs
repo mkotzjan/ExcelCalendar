@@ -33,6 +33,8 @@ namespace ExcelCalendar
             setMonths(xlWorkSheet);
             setDatesOfMonth(xlWorkSheet);
 
+            setBorders(xlWorkSheet);
+
             xlWorkBook.SaveAs(filePath, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);
             xlApp.Quit();
@@ -76,6 +78,11 @@ namespace ExcelCalendar
                 xlWorkSheet.Range[xlWorkSheet.Cells[2, (i * 4) + 1], xlWorkSheet.Cells[2, (i + 1) * 4]].Merge();
                 xlWorkSheet.Cells[2, (i * 4) + 1] = months[i];
             }
+        }
+
+        private static void setBorders(Excel.Worksheet xlWorkSheet)
+        {
+            xlWorkSheet.Range[xlWorkSheet.Cells[2, 1], xlWorkSheet.Cells[33, 48]].Borders.Color = System.Drawing.Color.Black;
         }
 
         private static void setDatesOfMonth(Excel.Worksheet xlWorkSheet)
