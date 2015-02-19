@@ -10,6 +10,7 @@ namespace ExcelCalendar
 {
     public static class GenerateExcel
     {
+        private static string[] months = new string[12] {"January", "February", "March", "April", "May", "June", "July", "August", "September", "Oktober", "November", "December" };
         public static void generate(string filePath)
         {
             Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
@@ -26,7 +27,10 @@ namespace ExcelCalendar
 
             xlWorkBook = xlApp.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-            xlWorkSheet.Cells[1, 1] = "Test";
+
+            setTitle(xlWorkSheet);
+
+            setMonths(xlWorkSheet);
 
             xlWorkBook.SaveAs(filePath, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);
@@ -56,5 +60,22 @@ namespace ExcelCalendar
                 GC.Collect();
             }
         }
+
+        private static void setTitle(Excel.Worksheet xlWorkSheet)
+        {
+            xlWorkSheet.Cells[1, 1] = "Calendar " + Options.year.ToString();
+            xlWorkSheet.Cells[1, 1].Font.Size = 30;
+            xlWorkSheet.Range[xlWorkSheet.Cells[1, 1], xlWorkSheet.Cells[1, 48]].Merge();
+        }
+
+        private static void setMonths(Excel.Worksheet xlWorkSheet)
+        {
+            for (int i = 0; i < 12; i++)
+            {
+                xlWorkSheet.Range[xlWorkSheet.Cells[2, (i * 4) + 1], xlWorkSheet.Cells[2, (i + 1) * 4]].Merge();
+                xlWorkSheet.Cells[2, (i * 4) + 1] = months[i];
+            }
+        }
+
     }
 }
