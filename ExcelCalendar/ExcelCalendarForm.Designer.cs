@@ -31,7 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExcelCalendarForm));
             this.generateExcel = new System.Windows.Forms.Button();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.yearUpDown = new System.Windows.Forms.NumericUpDown();
             this.tableLayout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.yearUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // generateExcel
@@ -45,7 +47,28 @@
             // 
             resources.ApplyResources(this.tableLayout, "tableLayout");
             this.tableLayout.Controls.Add(this.generateExcel, 0, 1);
+            this.tableLayout.Controls.Add(this.yearUpDown, 0, 0);
             this.tableLayout.Name = "tableLayout";
+            // 
+            // yearUpDown
+            // 
+            resources.ApplyResources(this.yearUpDown, "yearUpDown");
+            this.yearUpDown.Maximum = new decimal(new int[] {
+            3000,
+            0,
+            0,
+            0});
+            this.yearUpDown.Minimum = new decimal(new int[] {
+            1980,
+            0,
+            0,
+            0});
+            this.yearUpDown.Name = "yearUpDown";
+            this.yearUpDown.Value = new decimal(new int[] {
+            System.DateTime.Now.Year + 1,
+            0,
+            0,
+            0});
             // 
             // ExcelCalendarForm
             // 
@@ -55,6 +78,7 @@
             this.Name = "ExcelCalendarForm";
             this.Load += new System.EventHandler(this.ExcelCalendarForm_Load);
             this.tableLayout.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.yearUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -63,6 +87,7 @@
 
         private System.Windows.Forms.Button generateExcel;
         private System.Windows.Forms.TableLayoutPanel tableLayout;
+        private System.Windows.Forms.NumericUpDown yearUpDown;
     }
 }
 

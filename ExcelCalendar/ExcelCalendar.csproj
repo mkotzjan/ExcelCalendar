@@ -54,6 +54,8 @@
     <Compile Include="ExcelCalendarForm.Designer.cs">
       <DependentUpon>ExcelCalendarForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GenerateExcel.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ExcelCalendarForm.de-DE.resx">
