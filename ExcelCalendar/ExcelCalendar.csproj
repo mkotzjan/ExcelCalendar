@@ -34,7 +34,6 @@
   <ItemGroup>
     <Reference Include="ExcelLibrary">
       <HintPath>..\..\..\..\Downloads\ExcelLibrary.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,9 +55,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ExcelCalendarForm.de-DE.resx">
-      <DependentUpon>ExcelCalendarForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ExcelCalendarForm.de.resx">
       <DependentUpon>ExcelCalendarForm.cs</DependentUpon>
     </EmbeddedResource>
