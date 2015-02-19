@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace ExcelCalendar
 {
-    public partial class Form1 : Form
+    public partial class ExcelCalendarForm : Form
     {
-        public Form1()
+        public ExcelCalendarForm()
         {
             InitializeComponent();
+        }
+
+        private void ExcelCalendarForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
