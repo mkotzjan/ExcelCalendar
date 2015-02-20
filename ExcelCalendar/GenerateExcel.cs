@@ -11,14 +11,14 @@ namespace ExcelCalendar
 {
     public static class GenerateExcel
     {
-        private static string[] months = new string[12] {"January", "February", "March", "April", "May", "June", "July", "August", "September", "Oktober", "November", "December" };
+        private static string[] months = new string[12] {"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" };
         public static void generate(string filePath)
         {
             Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
 
             if (xlApp == null)
             {
-                MessageBox.Show("Excel is not properly installed!!");
+                MessageBox.Show("Excel ist nicht richtig instaliert!");
                 return;
             }
 
@@ -50,7 +50,7 @@ namespace ExcelCalendar
             releaseObject(xlWorkBook);
             releaseObject(xlApp);
 
-            MessageBox.Show(filePath.ToString() + " created.");
+            MessageBox.Show(filePath.ToString() + " erstellt.");
         }
 
         private static void releaseObject(object obj)
@@ -73,7 +73,7 @@ namespace ExcelCalendar
 
         private static void setTitle(Excel.Worksheet xlWorkSheet)
         {
-            xlWorkSheet.Cells[1, 1] = "Calendar " + Options.year.ToString();
+            xlWorkSheet.Cells[1, 1] = "Kalender " + Options.year.ToString();
             xlWorkSheet.Cells[1, 1].Font.Size = 30;
             xlWorkSheet.Range[xlWorkSheet.Cells[1, 1], xlWorkSheet.Cells[1, 48]].Merge();
         }
@@ -101,7 +101,16 @@ namespace ExcelCalendar
                 xlWorkSheet.Cells[2 + j, (i * 4) + 2] = day;
                 if (day == "Mo")
                 {
-                    xlWorkSheet.Cells[2 + j, (i * 4) + 4] = "KW" + getWeekNumber(i, j).ToString();
+                    xlWorkSheet.Cells[2 + j, (i * 4) + 4] = getWeekNumber(i, j).ToString();
+                    xlWorkSheet.Cells[2 + j, (i * 4) + 4].Font.Size = 6;
+                }
+                else if (day == "So")
+                {
+                    xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
+                }
+                else if (day == "Sa")
+                {
+                    xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 46;
                 }
             }
             else
@@ -111,6 +120,7 @@ namespace ExcelCalendar
             }
             xlWorkSheet.Columns[(i * 4) + 1].AutoFit();
             xlWorkSheet.Columns[(i * 4) + 2].AutoFit();
+            xlWorkSheet.Columns[(i * 4) + 4].AutoFit();
         }
 
         private static int getWeekNumber(int i, int j)
