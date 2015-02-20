@@ -43,7 +43,10 @@ namespace ExcelCalendar
                 {
                     setDaysOfMonth(xlWorkSheet, i, j);
                     setBorders(xlWorkSheet, i, j);
-                    setFeastDays(xlWorkSheet, i, j);
+                    if (Options.showFeast)
+                    {
+                        setFeastDays(xlWorkSheet, i, j);
+                    }
                     Program.form.progressBar.Value = (i * 31) + j;
                 }
             }

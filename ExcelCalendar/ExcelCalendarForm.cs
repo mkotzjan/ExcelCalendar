@@ -39,5 +39,20 @@ namespace ExcelCalendar
         {
             Options.year = (int)yearUpDown.Value;
         }
+
+        private void tableLayout_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void feastCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Options.showFeast = feastCheckBox.Checked;
+        }
     }
 }

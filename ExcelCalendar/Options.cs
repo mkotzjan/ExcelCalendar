@@ -9,5 +9,6 @@ namespace ExcelCalendar
     static class Options
     {
         public static int year = System.DateTime.Now.Year;
+        public static bool showFeast = false;
     }
 }
