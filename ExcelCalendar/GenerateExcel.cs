@@ -37,10 +37,10 @@ namespace ExcelCalendar
                 for (int j = 1; j < 32; j++)
                 {
                     setDaysOfMonth(xlWorkSheet, i, j);
+                    setBorders(xlWorkSheet, i, j);
+                    Program.form.progressBar.Value = (i * 31) + j;
                 }
             }
-            
-            // setBorders(xlWorkSheet);
 
             xlWorkBook.SaveAs(filePath, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);
@@ -84,9 +84,18 @@ namespace ExcelCalendar
             xlWorkSheet.Cells[2, (i * 4) + 1] = months[i];
         }
 
-        private static void setBorders(Excel.Worksheet xlWorkSheet)
+        private static void setBorders(Excel.Worksheet xlWorkSheet, int i, int j)
         {
-            xlWorkSheet.Range[xlWorkSheet.Cells[2, 1], xlWorkSheet.Cells[33, 48]].Borders.Color = System.Drawing.Color.Black;
+            xlWorkSheet.Range[xlWorkSheet.Cells[2, 1], xlWorkSheet.Cells[2, 48]].Borders.ColorIndex = 1;
+            xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlEdgeLeft].LineStyle = Excel.XlLineStyle.xlContinuous;
+            xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlEdgeTop].LineStyle = Excel.XlLineStyle.xlContinuous;
+            xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlEdgeBottom].LineStyle = Excel.XlLineStyle.xlContinuous;
+            xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlEdgeRight].LineStyle = Excel.XlLineStyle.xlContinuous;
+            xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders.ColorIndex = 1;
+            xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlInsideVertical].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
+            xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlInsideHorizontal].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
+            xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlDiagonalUp].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
+            xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlDiagonalDown].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
         }
 
         private static void setDaysOfMonth(Excel.Worksheet xlWorkSheet, int i, int j)

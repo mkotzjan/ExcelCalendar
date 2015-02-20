@@ -8,6 +8,7 @@ namespace ExcelCalendar
 {
     static class Program
     {
+        public static ExcelCalendarForm form;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +17,8 @@ namespace ExcelCalendar
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ExcelCalendarForm());
+            form = new ExcelCalendarForm();
+            Application.Run(form);
         }
     }
 }

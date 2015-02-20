@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExcelCalendarForm));
             this.generateExcel = new System.Windows.Forms.Button();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.yearUpDown = new System.Windows.Forms.NumericUpDown();
             this.tableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.yearUpDown)).BeginInit();
@@ -46,9 +47,16 @@
             // tableLayout
             // 
             resources.ApplyResources(this.tableLayout, "tableLayout");
+            this.tableLayout.Controls.Add(this.progressBar, 0, 2);
             this.tableLayout.Controls.Add(this.yearUpDown, 0, 0);
             this.tableLayout.Controls.Add(this.generateExcel, 0, 1);
             this.tableLayout.Name = "tableLayout";
+            // 
+            // progressBar
+            // 
+            resources.ApplyResources(this.progressBar, "progressBar");
+            this.progressBar.Maximum = 372;
+            this.progressBar.Name = "progressBar";
             // 
             // yearUpDown
             // 
@@ -65,7 +73,7 @@
             0});
             this.yearUpDown.Name = "yearUpDown";
             this.yearUpDown.Value = new decimal(new int[] {
-            Options.year,
+            2015,
             0,
             0,
             0});
@@ -89,6 +97,7 @@
         private System.Windows.Forms.Button generateExcel;
         private System.Windows.Forms.TableLayoutPanel tableLayout;
         private System.Windows.Forms.NumericUpDown yearUpDown;
+        public System.Windows.Forms.ProgressBar progressBar;
     }
 }
 
