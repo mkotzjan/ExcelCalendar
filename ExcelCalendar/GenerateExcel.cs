@@ -12,8 +12,13 @@ namespace ExcelCalendar
     public static class GenerateExcel
     {
         private static string[] months = new string[12] {"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" };
+        private static int easterMonth;
+        private static int easterDay;
+
         public static void generate(string filePath)
         {
+            calculateEastern(Options.year);
+
             Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
 
             if (xlApp == null)
@@ -38,6 +43,7 @@ namespace ExcelCalendar
                 {
                     setDaysOfMonth(xlWorkSheet, i, j);
                     setBorders(xlWorkSheet, i, j);
+                    setFeastDays(xlWorkSheet, i, j);
                     Program.form.progressBar.Value = (i * 31) + j;
                 }
             }
@@ -50,7 +56,10 @@ namespace ExcelCalendar
             releaseObject(xlWorkBook);
             releaseObject(xlApp);
 
-            MessageBox.Show(filePath.ToString() + " erstellt.");
+            if (MessageBox.Show(filePath.ToString() + " erstellt.") == DialogResult.OK)
+            {
+                Program.form.progressBar.Value = 0;
+            }
         }
 
         private static void releaseObject(object obj)
@@ -86,12 +95,6 @@ namespace ExcelCalendar
 
         private static void setBorders(Excel.Worksheet xlWorkSheet, int i, int j)
         {
-            //xlWorkSheet.Range[xlWorkSheet.Cells[2, (i * 4) + 1], xlWorkSheet.Cells[2, (i + 1) * 4]].Borders.ColorIndex = 1;
-            //xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlEdgeLeft].LineStyle = Excel.XlLineStyle.xlContinuous;
-            //xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlEdgeTop].LineStyle = Excel.XlLineStyle.xlContinuous;
-            //xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlEdgeBottom].LineStyle = Excel.XlLineStyle.xlContinuous;
-            //xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlEdgeRight].LineStyle = Excel.XlLineStyle.xlContinuous;
-            //xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders.ColorIndex = 1;
             xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlInsideVertical].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
             xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlInsideHorizontal].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
             xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlDiagonalUp].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
@@ -142,6 +145,109 @@ namespace ExcelCalendar
             }
 
             return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        }
+
+        private static void calculateEastern(int year)
+        {
+            int g = year % 19;
+            int c = year / 100;
+            int h = h = (c - (int)(c / 4) - (int)((8 * c + 13) / 25)
+                                                + 19 * g + 15) % 30;
+            int i = h - (int)(h / 28) * (1 - (int)(h / 28) *
+                        (int)(29 / (h + 1)) * (int)((21 - g) / 11));
+
+            int day = i - ((year + (int)(year / 4) +
+                          i + 2 - c + (int)(c / 4)) % 7) + 28;
+            int month = 3;
+
+            if (day > 31)
+            {
+                month++;
+                day -= 31;
+            }
+
+            easterMonth = month;
+            easterDay = day;
+        }
+        private static void setFeastDays(Excel.Worksheet xlWorkSheet, int i, int j)
+        {
+            if (i == 0 && j == 1)
+            {
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Neujahr";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
+            }
+            else if (i == 0 && j == 6)
+            {
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Hl. Drei Könige";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
+            }
+            else if (i + 1 == new DateTime(Options.year, easterMonth, easterDay).AddDays(-2).Month && j == new DateTime(Options.year, easterMonth, easterDay).AddDays(-2).Day)
+            {
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Karfreitag";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
+            }
+            else if (i + 1 == easterMonth && j == easterDay)
+            {
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Ostersonntag";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
+            }
+            else if (i + 1 == new DateTime(Options.year, easterMonth, easterDay).AddDays(1).Month && j == new DateTime(Options.year, easterMonth, easterDay).AddDays(1).Day)
+            {
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Ostermontag";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
+            }
+            else if (i + 1 == 5 && j == 1)
+            {
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Maifeiertag";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
+            }
+            else if (i + 1 == new DateTime(Options.year, easterMonth, easterDay).AddDays(39).Month && j == new DateTime(Options.year, easterMonth, easterDay).AddDays(39).Day)
+            {
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Christi Himmelfahrt";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
+            }
+            else if (i + 1 == new DateTime(Options.year, easterMonth, easterDay).AddDays(50).Month && j == new DateTime(Options.year, easterMonth, easterDay).AddDays(50).Day)
+            {
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Pfingstmontag";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
+            }
+            else if (i + 1 == new DateTime(Options.year, easterMonth, easterDay).AddDays(60).Month && j == new DateTime(Options.year, easterMonth, easterDay).AddDays(60).Day)
+            {
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Fronleichnam";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
+            }
+            else if (i + 1 == 10 && j == 3)
+            {
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Tag der deutschen Einheit";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
+            }
+            else if (i + 1 == 11 && j == 1)
+            {
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Allerheiligen";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
+            }
+            else if (i + 1 == 12 && j == 25)
+            {
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Erster Weihnachtsfeiertag";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
+            }
+            else if (i + 1 == 12 && j == 26)
+            {
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Zweiter Weihnachtsfeiertag";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
+            }
         }
     }
 }

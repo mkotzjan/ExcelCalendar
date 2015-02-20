@@ -67,7 +67,7 @@
             0,
             0});
             this.yearUpDown.Minimum = new decimal(new int[] {
-            1980,
+            1900,
             0,
             0,
             0});
