@@ -107,7 +107,7 @@ namespace ExcelCalendar
             else
             {
                 xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Merge();
-                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 1]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 1]].Interior.ColorIndex = 15;
             }
             xlWorkSheet.Columns[(i * 4) + 1].AutoFit();
             xlWorkSheet.Columns[(i * 4) + 2].AutoFit();
