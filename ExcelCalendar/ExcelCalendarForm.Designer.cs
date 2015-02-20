@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExcelCalendarForm));
             this.generateExcel = new System.Windows.Forms.Button();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
@@ -38,6 +39,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.feastCheckBox = new System.Windows.Forms.CheckBox();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.yearUpDown)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -120,6 +122,10 @@
             this.feastCheckBox.UseVisualStyleBackColor = true;
             this.feastCheckBox.CheckedChanged += new System.EventHandler(this.feastCheckBox_CheckedChanged);
             // 
+            // notifyIcon1
+            // 
+            resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
+            // 
             // ExcelCalendarForm
             // 
             resources.ApplyResources(this, "$this");
@@ -150,6 +156,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox feastCheckBox;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 
