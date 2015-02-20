@@ -25,7 +25,7 @@ namespace ExcelCalendar
         private void generateExcel_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveExcel = new SaveFileDialog();
-            saveExcel.Filter = "Excel|*.xls";
+            saveExcel.Filter = "Excel Worksheet|*.xls";
             saveExcel.FilterIndex = 1;
 
             if(saveExcel.ShowDialog() == DialogResult.OK)

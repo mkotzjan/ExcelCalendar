@@ -97,7 +97,12 @@ namespace ExcelCalendar
             {
                 xlWorkSheet.Cells[2 + j, (i * 4) + 1] = j;
                 DateTime dt = new DateTime(Options.year, i + 1, j);
-                xlWorkSheet.Cells[2 + j, (i * 4) + 2] = dt.ToString("dddd", DateTimeFormatInfo.CurrentInfo).Substring(0, 2);
+                string day = dt.ToString("dddd", DateTimeFormatInfo.CurrentInfo).Substring(0, 2);
+                xlWorkSheet.Cells[2 + j, (i * 4) + 2] = day;
+                if (day == "Mo")
+                {
+                    xlWorkSheet.Cells[2 + j, (i * 4) + 4] = "KW" + getWeekNumber(i, j).ToString();
+                }
             }
             else
             {
@@ -106,6 +111,18 @@ namespace ExcelCalendar
             }
             xlWorkSheet.Columns[(i * 4) + 1].AutoFit();
             xlWorkSheet.Columns[(i * 4) + 2].AutoFit();
+        }
+
+        private static int getWeekNumber(int i, int j)
+        {
+            DateTime time = new DateTime(Options.year, i + 1, j);
+            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
+            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
+            {
+                time = time.AddDays(3);
+            }
+
+            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
         }
     }
 }
