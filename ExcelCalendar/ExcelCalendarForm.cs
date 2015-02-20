@@ -27,6 +27,7 @@ namespace ExcelCalendar
             SaveFileDialog saveExcel = new SaveFileDialog();
             saveExcel.Filter = "Excel Worksheet|*.xls";
             saveExcel.FilterIndex = 1;
+            saveExcel.OverwritePrompt = false;
 
             if(saveExcel.ShowDialog() == DialogResult.OK)
             {
