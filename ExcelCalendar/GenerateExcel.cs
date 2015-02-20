@@ -31,11 +31,16 @@ namespace ExcelCalendar
 
             setTitle(xlWorkSheet);
 
-            setMonths(xlWorkSheet);
-            setDatesOfMonth(xlWorkSheet);
-            setNameOfDay(xlWorkSheet);
-
-            setBorders(xlWorkSheet);
+            for (int i = 0; i < 12; i++)
+            {
+                setMonths(xlWorkSheet, i);
+                for (int j = 1; j < 32; j++)
+                {
+                    setDaysOfMonth(xlWorkSheet, i, j);
+                }
+            }
+            
+            // setBorders(xlWorkSheet);
 
             xlWorkBook.SaveAs(filePath, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);
@@ -73,13 +78,10 @@ namespace ExcelCalendar
             xlWorkSheet.Range[xlWorkSheet.Cells[1, 1], xlWorkSheet.Cells[1, 48]].Merge();
         }
 
-        private static void setMonths(Excel.Worksheet xlWorkSheet)
+        private static void setMonths(Excel.Worksheet xlWorkSheet, int i)
         {
-            for (int i = 0; i < 12; i++)
-            {
-                xlWorkSheet.Range[xlWorkSheet.Cells[2, (i * 4) + 1], xlWorkSheet.Cells[2, (i + 1) * 4]].Merge();
-                xlWorkSheet.Cells[2, (i * 4) + 1] = months[i];
-            }
+            xlWorkSheet.Range[xlWorkSheet.Cells[2, (i * 4) + 1], xlWorkSheet.Cells[2, (i + 1) * 4]].Merge();
+            xlWorkSheet.Cells[2, (i * 4) + 1] = months[i];
         }
 
         private static void setBorders(Excel.Worksheet xlWorkSheet)
@@ -87,45 +89,23 @@ namespace ExcelCalendar
             xlWorkSheet.Range[xlWorkSheet.Cells[2, 1], xlWorkSheet.Cells[33, 48]].Borders.Color = System.Drawing.Color.Black;
         }
 
-        private static void setDatesOfMonth(Excel.Worksheet xlWorkSheet)
+        private static void setDaysOfMonth(Excel.Worksheet xlWorkSheet, int i, int j)
         {
-            for (int i = 0; i < 12; i++)
-            {
-                int daysCount = System.DateTime.DaysInMonth(Options.year, i + 1);
-                for (int j = 1; j < 32; j++)
-                {
-                    if (j <= daysCount)
-                    {
-                        xlWorkSheet.Cells[2 + j, (i * 4) + 1] = j;
-                    }
-                    else
-                    {
-                        xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 1]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
-                    }
-                }
-                xlWorkSheet.Columns[(i * 4) + 1].AutoFit();
-            }
-        }
+            int daysCount = System.DateTime.DaysInMonth(Options.year, i + 1);
 
-        private static void setNameOfDay(Excel.Worksheet xlWorkSheet)
-        {
-            for (int i = 0; i < 12; i++)
+            if (j <= daysCount)
             {
-                int daysCount = System.DateTime.DaysInMonth(Options.year, i + 1);
-                for (int j = 1; j < 32; j++)
-                {
-                    if (j <= daysCount)
-                    {
-                        DateTime dt = new DateTime(Options.year, i + 1, j);
-                        xlWorkSheet.Cells[2 + j, (i * 4) + 2] = dt.ToString("dddd", DateTimeFormatInfo.CurrentInfo).Substring(0, 2);
-                    }
-                    else
-                    {
-                        xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 1]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
-                    }
-                }
-                xlWorkSheet.Columns[(i * 4) + 1].AutoFit();
+                xlWorkSheet.Cells[2 + j, (i * 4) + 1] = j;
+                DateTime dt = new DateTime(Options.year, i + 1, j);
+                xlWorkSheet.Cells[2 + j, (i * 4) + 2] = dt.ToString("dddd", DateTimeFormatInfo.CurrentInfo).Substring(0, 2);
             }
+            else
+            {
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Merge();
+                xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 1]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
+            }
+            xlWorkSheet.Columns[(i * 4) + 1].AutoFit();
+            xlWorkSheet.Columns[(i * 4) + 2].AutoFit();
         }
     }
 }
