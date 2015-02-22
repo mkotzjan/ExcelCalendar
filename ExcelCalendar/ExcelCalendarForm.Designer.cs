@@ -32,17 +32,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExcelCalendarForm));
             this.generateExcel = new System.Windows.Forms.Button();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.yearUpDown = new System.Windows.Forms.NumericUpDown();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.label = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.yearUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.feastCheckBox = new System.Windows.Forms.CheckBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tableLayout.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.yearUpDown)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.yearUpDown)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +62,19 @@
             this.tableLayout.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tableLayout.Name = "tableLayout";
             this.tableLayout.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayout_Paint);
+            // 
+            // progressBar
+            // 
+            resources.ApplyResources(this.progressBar, "progressBar");
+            this.progressBar.Maximum = 372;
+            this.progressBar.Name = "progressBar";
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.yearUpDown, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label, 0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // yearUpDown
             // 
@@ -84,24 +97,11 @@
             0});
             this.yearUpDown.ValueChanged += new System.EventHandler(this.yearUpDown_ValueChanged);
             // 
-            // progressBar
-            // 
-            resources.ApplyResources(this.progressBar, "progressBar");
-            this.progressBar.Maximum = 372;
-            this.progressBar.Name = "progressBar";
-            // 
             // label
             // 
             resources.ApplyResources(this.label, "label");
             this.label.Name = "label";
             this.label.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // tableLayoutPanel1
-            // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.yearUpDown, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label, 0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // tableLayoutPanel2
             // 
@@ -136,9 +136,9 @@
             this.Name = "ExcelCalendarForm";
             this.Load += new System.EventHandler(this.ExcelCalendarForm_Load);
             this.tableLayout.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.yearUpDown)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.yearUpDown)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
