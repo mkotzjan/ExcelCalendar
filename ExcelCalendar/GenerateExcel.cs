@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace ExcelCalendar
 {
@@ -14,6 +16,9 @@ namespace ExcelCalendar
         private static string[] months = new string[12] {"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" };
         private static int easterMonth;
         private static int easterDay;
+        private static int year;
+        private static string website;
+        private static List<Tuple<DateTime, DateTime>> holidays = new List<Tuple<DateTime, DateTime>>();
 
         public static void generate(string filePath)
         {
@@ -33,7 +38,7 @@ namespace ExcelCalendar
 
             xlWorkBook = xlApp.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-
+            getHolidays();
             setTitle(xlWorkSheet);
             xlWorkSheet.Range[xlWorkSheet.Cells[2, 1], xlWorkSheet.Cells[33, 48]].Borders.Color = System.Drawing.Color.Black;
             for (int i = 0; i < 12; i++)
@@ -251,6 +256,32 @@ namespace ExcelCalendar
                 xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
                 xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
             }
+        }
+
+        private static void getHolidays()
+        {
+            if (year != Options.year)
+            {
+                WebClient w = new WebClient();
+                string url = "http://www.kalenderpedia.de/ferien/ferien-baden-wuerttemberg-" + Options.year + ".html";
+                website = w.DownloadString(url);
+
+                MatchCollection matchCollection = Regex.Matches(website, @">([\d]+\.[\d]+\.[\d]+\s-\s[\d]+\.[\d]+\.[\d]+)<\/td>",
+                RegexOptions.Singleline);
+
+                foreach (Match m in matchCollection)
+                {
+                    convertToDate(m.Groups[1].ToString());
+                }
+
+            }
+
+            year = Options.year;
+        }
+
+        private static void convertToDate(string rawDate)
+        {
+
         }
     }
 }
