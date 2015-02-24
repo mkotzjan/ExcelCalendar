@@ -200,7 +200,7 @@ namespace ExcelCalendar
             }
             else if (i == 0 && j == 6)
             {
-                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Hl. Drei Könige";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Hl. Drei\r\nKönige";
                 xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
                 xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
             }
@@ -229,7 +229,7 @@ namespace ExcelCalendar
             }
             else if (i + 1 == new DateTime(Options.year, easterMonth, easterDay).AddDays(39).Month && j == new DateTime(Options.year, easterMonth, easterDay).AddDays(39).Day)
             {
-                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Christi Himmelfahrt";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Christi\r\nHimmelfahrt";
                 xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
                 xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
             }
@@ -247,7 +247,7 @@ namespace ExcelCalendar
             }
             else if (i + 1 == 10 && j == 3)
             {
-                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Tag der deutschen Einheit";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Tag der\r\ndeutschen Einheit";
                 xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
                 xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
             }
@@ -259,13 +259,13 @@ namespace ExcelCalendar
             }
             else if (i + 1 == 12 && j == 25)
             {
-                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Erster Weihnachtsfeiertag";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Erster\r\nWeihnachtsfeiertag";
                 xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
                 xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
             }
             else if (i + 1 == 12 && j == 26)
             {
-                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Zweiter Weihnachtsfeiertag";
+                xlWorkSheet.Cells[2 + j, (i * 4) + 3] = "Zweiter\r\nWeihnachtsfeiertag";
                 xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
                 xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
             }
