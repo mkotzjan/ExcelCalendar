@@ -10,5 +10,6 @@ namespace ExcelCalendar
     {
         public static int year = System.DateTime.Now.Year;
         public static bool showFeast = false;
+        public static bool showHoliday = false;
     }
 }

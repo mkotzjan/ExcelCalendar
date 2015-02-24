@@ -54,5 +54,10 @@ namespace ExcelCalendar
         {
             Options.showFeast = feastCheckBox.Checked;
         }
+
+        private void holidayCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Options.showHoliday = holidayCheckBox.Checked;
+        }
     }
 }

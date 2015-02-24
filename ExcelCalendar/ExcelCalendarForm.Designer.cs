@@ -40,10 +40,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.feastCheckBox = new System.Windows.Forms.CheckBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.holidayCheckBox = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.tableLayout.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.yearUpDown)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // generateExcel
@@ -60,6 +64,7 @@
             this.tableLayout.Controls.Add(this.generateExcel, 0, 3);
             this.tableLayout.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayout.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayout.Controls.Add(this.tableLayoutPanel3, 0, 2);
             this.tableLayout.Name = "tableLayout";
             this.tableLayout.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayout_Paint);
             // 
@@ -126,6 +131,25 @@
             // 
             resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
             // 
+            // tableLayoutPanel3
+            // 
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.holidayCheckBox, 1, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // holidayCheckBox
+            // 
+            resources.ApplyResources(this.holidayCheckBox, "holidayCheckBox");
+            this.holidayCheckBox.Name = "holidayCheckBox";
+            this.holidayCheckBox.UseVisualStyleBackColor = true;
+            this.holidayCheckBox.CheckedChanged += new System.EventHandler(this.holidayCheckBox_CheckedChanged);
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
             // ExcelCalendarForm
             // 
             resources.ApplyResources(this, "$this");
@@ -141,6 +165,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.yearUpDown)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -157,6 +183,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox feastCheckBox;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox holidayCheckBox;
     }
 }
 
