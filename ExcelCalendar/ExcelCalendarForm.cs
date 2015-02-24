@@ -24,6 +24,12 @@ namespace ExcelCalendar
 
         private void generateExcel_Click(object sender, EventArgs e)
         {
+            if (Options.year < 2000 && Options.showHoliday == true)
+            {
+                MessageBox.Show("Keine Ferien in Datenbank vorhanden.");
+                Options.showHoliday = false;
+                holidayCheckBox.Checked = false;
+            }
             SaveFileDialog saveExcel = new SaveFileDialog();
             saveExcel.Filter = "Excel Worksheet|*.xls";
             saveExcel.FilterIndex = 1;

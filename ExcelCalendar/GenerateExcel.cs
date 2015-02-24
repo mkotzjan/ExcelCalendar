@@ -38,7 +38,16 @@ namespace ExcelCalendar
 
             xlWorkBook = xlApp.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-            getHolidays();
+
+            if (Options.showHoliday)
+            {
+                getHolidays();
+                if (holidays.Count != 6)
+                {
+                    MessageBox.Show("Beim ermitteln der Ferien ist ein Fehler aufgetreten");
+                }
+            }
+            
             setTitle(xlWorkSheet);
             xlWorkSheet.Range[xlWorkSheet.Cells[2, 1], xlWorkSheet.Cells[33, 48]].Borders.Color = System.Drawing.Color.Black;
             for (int i = 0; i < 12; i++)
@@ -48,6 +57,10 @@ namespace ExcelCalendar
                 {
                     setDaysOfMonth(xlWorkSheet, i, j);
                     setBorders(xlWorkSheet, i, j);
+                    if (Options.showHoliday)
+                    {
+                        setHolidays(xlWorkSheet, i, j);
+                    }
                     if (Options.showFeast)
                     {
                         setFeastDays(xlWorkSheet, i, j);
@@ -281,7 +294,29 @@ namespace ExcelCalendar
 
         private static void convertToDate(string rawDate)
         {
+            string[] splitDate = rawDate.Split(new Char[] { '.', ' '});
+            DateTime startDay = new DateTime(Convert.ToInt32("20" + splitDate[2]), Convert.ToInt32(splitDate[1]), Convert.ToInt32(splitDate[0]));
+            DateTime endDay = new DateTime(Convert.ToInt32("20" + splitDate[6]), Convert.ToInt32(splitDate[5]), Convert.ToInt32(splitDate[4]));
+            holidays.Add(new Tuple<DateTime,DateTime> (startDay, endDay));
+        }
 
+        private static void setHolidays(Excel.Worksheet xlWorkSheet, int i, int j)
+        {
+            try
+            {
+                DateTime now = new DateTime(Options.year, i + 1, j);
+                foreach (Tuple<DateTime, DateTime> tuple in holidays)
+                {
+                    if (now.Ticks >= tuple.Item1.Ticks && now.Ticks <= tuple.Item2.Ticks)
+                    {
+                        xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 40;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                
+            }
         }
     }
 }
