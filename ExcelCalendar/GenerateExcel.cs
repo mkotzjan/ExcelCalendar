@@ -70,7 +70,7 @@ namespace ExcelCalendar
             }
 
             xlWorkBook.SaveAs(filePath, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-            xlWorkBook.Close(true, misValue, misValue);
+            xlWorkBook.Close(0);
             xlApp.Quit();
 
             releaseObject(xlWorkSheet);
