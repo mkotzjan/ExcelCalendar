@@ -76,7 +76,6 @@ namespace ExcelCalendar
             releaseObject(xlWorkSheet);
             releaseObject(xlWorkBook);
             releaseObject(xlApp);
-
             if (MessageBox.Show(filePath.ToString() + " erstellt.") == DialogResult.OK)
             {
                 Program.form.progressBar.Value = 0;
