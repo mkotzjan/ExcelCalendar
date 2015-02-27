@@ -61,13 +61,13 @@ namespace ExcelCalendar
                     {
                         setHolidays(xlWorkSheet, i, j);
                     }
-                    if (Options.showFeast)
-                    {
-                        setFeastDays(xlWorkSheet, i, j);
-                    }
                     if (Options.showWeek)
                     {
                         setWeek(xlWorkSheet, i, j);
+                    }
+                    if (Options.showFeast)
+                    {
+                        setFeastDays(xlWorkSheet, i, j);
                     }
                     Program.form.progressBar.Value = (i * 31) + j;
                 }
@@ -324,7 +324,18 @@ namespace ExcelCalendar
 
         private static void setWeek(Excel.Worksheet xlWorkSheet, int i, int j)
         {
+            try
+            {
+                DateTime now = new DateTime(Options.year, i + 1, j);
+                if (now.DayOfWeek != DayOfWeek.Sunday && now.DayOfWeek != DayOfWeek.Saturday)
+                {
+                    xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 4], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 38;
+                }
+            }
+            catch (Exception)
+            {
 
+            }
         }
     }
 }
