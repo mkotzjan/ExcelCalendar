@@ -39,15 +39,23 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.feastCheckBox = new System.Windows.Forms.CheckBox();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.holidayCheckBox = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.holidayCheckBox = new System.Windows.Forms.CheckBox();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.weekCheckBox = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.weekComboBox = new System.Windows.Forms.ComboBox();
             this.tableLayout.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.yearUpDown)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // generateExcel
@@ -60,11 +68,13 @@
             // tableLayout
             // 
             resources.ApplyResources(this.tableLayout, "tableLayout");
-            this.tableLayout.Controls.Add(this.progressBar, 0, 4);
-            this.tableLayout.Controls.Add(this.generateExcel, 0, 3);
+            this.tableLayout.Controls.Add(this.tableLayoutPanel5, 0, 4);
             this.tableLayout.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayout.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tableLayout.Controls.Add(this.tableLayoutPanel3, 0, 2);
+            this.tableLayout.Controls.Add(this.generateExcel, 0, 5);
+            this.tableLayout.Controls.Add(this.progressBar, 0, 6);
+            this.tableLayout.Controls.Add(this.tableLayoutPanel4, 0, 3);
             this.tableLayout.Name = "tableLayout";
             this.tableLayout.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayout_Paint);
             // 
@@ -127,16 +137,17 @@
             this.feastCheckBox.UseVisualStyleBackColor = true;
             this.feastCheckBox.CheckedChanged += new System.EventHandler(this.feastCheckBox_CheckedChanged);
             // 
-            // notifyIcon1
-            // 
-            resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
-            // 
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
             this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.holidayCheckBox, 1, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
             // 
             // holidayCheckBox
             // 
@@ -145,10 +156,50 @@
             this.holidayCheckBox.UseVisualStyleBackColor = true;
             this.holidayCheckBox.CheckedChanged += new System.EventHandler(this.holidayCheckBox_CheckedChanged);
             // 
-            // label3
+            // notifyIcon1
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // tableLayoutPanel4
+            // 
+            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
+            this.tableLayoutPanel4.Controls.Add(this.weekCheckBox, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            // 
+            // weekCheckBox
+            // 
+            resources.ApplyResources(this.weekCheckBox, "weekCheckBox");
+            this.weekCheckBox.Name = "weekCheckBox";
+            this.weekCheckBox.UseVisualStyleBackColor = true;
+            this.weekCheckBox.CheckedChanged += new System.EventHandler(this.weekCheckBox_CheckedChanged);
+            // 
+            // tableLayoutPanel5
+            // 
+            resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
+            this.tableLayoutPanel5.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.weekComboBox, 1, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel5_Paint);
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // weekComboBox
+            // 
+            resources.ApplyResources(this.weekComboBox, "weekComboBox");
+            this.weekComboBox.FormattingEnabled = true;
+            this.weekComboBox.Items.AddRange(new object[] {
+            resources.GetString("weekComboBox.Items"),
+            resources.GetString("weekComboBox.Items1")});
+            this.weekComboBox.Name = "weekComboBox";
             // 
             // ExcelCalendarForm
             // 
@@ -167,6 +218,10 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -186,6 +241,12 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox holidayCheckBox;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox weekComboBox;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.CheckBox weekCheckBox;
+        private System.Windows.Forms.Label label5;
     }
 }
 

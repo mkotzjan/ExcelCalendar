@@ -65,5 +65,15 @@ namespace ExcelCalendar
         {
             Options.showHoliday = holidayCheckBox.Checked;
         }
+
+        private void tableLayoutPanel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void weekCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
