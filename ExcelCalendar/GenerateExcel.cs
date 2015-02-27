@@ -65,6 +65,10 @@ namespace ExcelCalendar
                     {
                         setFeastDays(xlWorkSheet, i, j);
                     }
+                    if (Options.showWeek)
+                    {
+                        setWeek(xlWorkSheet, i, j);
+                    }
                     Program.form.progressBar.Value = (i * 31) + j;
                 }
             }
@@ -316,6 +320,11 @@ namespace ExcelCalendar
             {
                 
             }
+        }
+
+        private static void setWeek(Excel.Worksheet xlWorkSheet, int i, int j)
+        {
+
         }
     }
 }
