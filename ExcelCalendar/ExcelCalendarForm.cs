@@ -30,14 +30,21 @@ namespace ExcelCalendar
                 Options.showHoliday = false;
                 holidayCheckBox.Checked = false;
             }
-            SaveFileDialog saveExcel = new SaveFileDialog();
-            saveExcel.Filter = "Excel Worksheet|*.xls";
-            saveExcel.FilterIndex = 1;
-            saveExcel.OverwritePrompt = false;
-
-            if(saveExcel.ShowDialog() == DialogResult.OK)
+            else if (Options.showWeek == true && Options.week == -1)
             {
-                GenerateExcel.generate(saveExcel.FileName);
+                MessageBox.Show("Bitte Schicht wählen.");
+            }
+            else
+            {
+                SaveFileDialog saveExcel = new SaveFileDialog();
+                saveExcel.Filter = "Excel Worksheet|*.xls";
+                saveExcel.FilterIndex = 1;
+                saveExcel.OverwritePrompt = false;
+
+                if (saveExcel.ShowDialog() == DialogResult.OK)
+                {
+                    GenerateExcel.generate(saveExcel.FileName);
+                }
             }
         }
 
@@ -73,7 +80,12 @@ namespace ExcelCalendar
 
         private void weekCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            
+            Options.showWeek = weekCheckBox.Checked;
+        }
+
+        private void weekComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Options.week = weekComboBox.SelectedIndex;
         }
     }
 }

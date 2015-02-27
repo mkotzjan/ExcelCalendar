@@ -200,6 +200,7 @@
             resources.GetString("weekComboBox.Items"),
             resources.GetString("weekComboBox.Items1")});
             this.weekComboBox.Name = "weekComboBox";
+            this.weekComboBox.SelectedIndexChanged += new System.EventHandler(this.weekComboBox_SelectedIndexChanged);
             // 
             // ExcelCalendarForm
             // 
