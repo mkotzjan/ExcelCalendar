@@ -19,10 +19,12 @@ namespace ExcelCalendar
         private static int year;
         private static string website;
         private static List<Tuple<DateTime, DateTime>> holidays = new List<Tuple<DateTime, DateTime>>();
+        private static int week;
 
         public static void generate(string filePath)
         {
             calculateEastern(Options.year);
+            week = Options.week;
 
             Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
 
@@ -330,7 +332,25 @@ namespace ExcelCalendar
                 DateTime now = new DateTime(Options.year, i + 1, j);
                 if (now.DayOfWeek != DayOfWeek.Sunday && now.DayOfWeek != DayOfWeek.Saturday)
                 {
-                    xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 4], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 38;
+                    if (week == 0)
+                    {
+                        xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 4], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 38;
+                    }
+                    else
+                    {
+                        xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 4], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 30;
+                    }
+                }
+                else if (now.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    if (week == 0)
+                    {
+                        week = 1;
+                    }
+                    else
+                    {
+                        week = 0;
+                    }
                 }
             }
             catch (Exception)

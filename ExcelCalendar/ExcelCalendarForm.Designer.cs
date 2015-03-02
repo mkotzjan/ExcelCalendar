@@ -32,7 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExcelCalendarForm));
             this.generateExcel = new System.Windows.Forms.Button();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.weekComboBox = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.yearUpDown = new System.Windows.Forms.NumericUpDown();
             this.label = new System.Windows.Forms.Label();
@@ -42,20 +44,18 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.holidayCheckBox = new System.Windows.Forms.CheckBox();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.label5 = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.weekCheckBox = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.weekComboBox = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tableLayout.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.yearUpDown)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // generateExcel
@@ -78,11 +78,28 @@
             this.tableLayout.Name = "tableLayout";
             this.tableLayout.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayout_Paint);
             // 
-            // progressBar
+            // tableLayoutPanel5
             // 
-            resources.ApplyResources(this.progressBar, "progressBar");
-            this.progressBar.Maximum = 372;
-            this.progressBar.Name = "progressBar";
+            resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
+            this.tableLayoutPanel5.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.weekComboBox, 1, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel5_Paint);
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // weekComboBox
+            // 
+            resources.ApplyResources(this.weekComboBox, "weekComboBox");
+            this.weekComboBox.FormattingEnabled = true;
+            this.weekComboBox.Items.AddRange(new object[] {
+            resources.GetString("weekComboBox.Items"),
+            resources.GetString("weekComboBox.Items1")});
+            this.weekComboBox.Name = "weekComboBox";
+            this.weekComboBox.SelectedIndexChanged += new System.EventHandler(this.weekComboBox_SelectedIndexChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -156,14 +173,11 @@
             this.holidayCheckBox.UseVisualStyleBackColor = true;
             this.holidayCheckBox.CheckedChanged += new System.EventHandler(this.holidayCheckBox_CheckedChanged);
             // 
-            // notifyIcon1
+            // progressBar
             // 
-            resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
-            // 
-            // label5
-            // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
+            resources.ApplyResources(this.progressBar, "progressBar");
+            this.progressBar.Maximum = 372;
+            this.progressBar.Name = "progressBar";
             // 
             // tableLayoutPanel4
             // 
@@ -179,28 +193,14 @@
             this.weekCheckBox.UseVisualStyleBackColor = true;
             this.weekCheckBox.CheckedChanged += new System.EventHandler(this.weekCheckBox_CheckedChanged);
             // 
-            // tableLayoutPanel5
+            // label5
             // 
-            resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
-            this.tableLayoutPanel5.Controls.Add(this.label6, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.weekComboBox, 1, 0);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel5_Paint);
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
             // 
-            // label6
+            // notifyIcon1
             // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
-            // weekComboBox
-            // 
-            resources.ApplyResources(this.weekComboBox, "weekComboBox");
-            this.weekComboBox.FormattingEnabled = true;
-            this.weekComboBox.Items.AddRange(new object[] {
-            resources.GetString("weekComboBox.Items"),
-            resources.GetString("weekComboBox.Items1")});
-            this.weekComboBox.Name = "weekComboBox";
-            this.weekComboBox.SelectedIndexChanged += new System.EventHandler(this.weekComboBox_SelectedIndexChanged);
+            resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
             // 
             // ExcelCalendarForm
             // 
@@ -212,6 +212,8 @@
             this.Name = "ExcelCalendarForm";
             this.Load += new System.EventHandler(this.ExcelCalendarForm_Load);
             this.tableLayout.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.yearUpDown)).EndInit();
@@ -221,8 +223,6 @@
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
