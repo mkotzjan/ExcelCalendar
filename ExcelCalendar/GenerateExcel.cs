@@ -55,12 +55,13 @@ namespace ExcelCalendar
                 setMonths(xlWorkSheet, i);
                 for (int j = 1; j < 32; j++)
                 {
-                    setDaysOfMonth(xlWorkSheet, i, j);
-                    setBorders(xlWorkSheet, i, j);
                     if (Options.showHoliday)
                     {
                         setHolidays(xlWorkSheet, i, j);
                     }
+                    setDaysOfMonth(xlWorkSheet, i, j);
+                    setBorders(xlWorkSheet, i, j);
+                    
                     if (Options.showWeek)
                     {
                         setWeek(xlWorkSheet, i, j);
