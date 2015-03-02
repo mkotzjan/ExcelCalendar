@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Drawing;
 
 namespace ExcelCalendar
 {
@@ -23,6 +24,7 @@ namespace ExcelCalendar
 
         public static void generate(string filePath)
         {
+            DateTime startTime = DateTime.Now;
             calculateEastern(Options.year);
             week = Options.week;
 
@@ -73,6 +75,10 @@ namespace ExcelCalendar
                         setFeastDays(xlWorkSheet, i, j);
                     }
                     Program.form.progressBar.Value = (i * 31) + j;
+                    TimeSpan timePassed = DateTime.Now - startTime;
+                    double timeRemaining = (timePassed.TotalSeconds / ((i * 31) + j)) * (372 - ((i * 31) + j));
+                    Program.form.Text = "Noch " + Convert.ToInt32(timeRemaining).ToString() + " Sekunden";
+                    
                 }
             }
 
@@ -86,6 +92,7 @@ namespace ExcelCalendar
             if (MessageBox.Show(filePath.ToString() + " erstellt.") == DialogResult.OK)
             {
                 Program.form.progressBar.Value = 0;
+                Program.form.Text = "ExcelKalender";
             }
         }
 
