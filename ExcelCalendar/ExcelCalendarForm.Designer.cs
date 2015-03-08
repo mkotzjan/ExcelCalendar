@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExcelCalendarForm));
-            this.generateExcel = new System.Windows.Forms.Button();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
@@ -44,11 +43,12 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.holidayCheckBox = new System.Windows.Forms.CheckBox();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.weekCheckBox = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.generateExcel = new System.Windows.Forms.Button();
             this.tableLayout.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -58,23 +58,16 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // generateExcel
-            // 
-            resources.ApplyResources(this.generateExcel, "generateExcel");
-            this.generateExcel.Name = "generateExcel";
-            this.generateExcel.UseVisualStyleBackColor = true;
-            this.generateExcel.Click += new System.EventHandler(this.generateExcel_Click);
-            // 
             // tableLayout
             // 
             resources.ApplyResources(this.tableLayout, "tableLayout");
+            this.tableLayout.Controls.Add(this.progressBar, 0, 7);
             this.tableLayout.Controls.Add(this.tableLayoutPanel5, 0, 4);
             this.tableLayout.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayout.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tableLayout.Controls.Add(this.tableLayoutPanel3, 0, 2);
-            this.tableLayout.Controls.Add(this.generateExcel, 0, 5);
-            this.tableLayout.Controls.Add(this.progressBar, 0, 6);
             this.tableLayout.Controls.Add(this.tableLayoutPanel4, 0, 3);
+            this.tableLayout.Controls.Add(this.generateExcel, 0, 6);
             this.tableLayout.Name = "tableLayout";
             this.tableLayout.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayout_Paint);
             // 
@@ -173,12 +166,6 @@
             this.holidayCheckBox.UseVisualStyleBackColor = true;
             this.holidayCheckBox.CheckedChanged += new System.EventHandler(this.holidayCheckBox_CheckedChanged);
             // 
-            // progressBar
-            // 
-            resources.ApplyResources(this.progressBar, "progressBar");
-            this.progressBar.Maximum = 372;
-            this.progressBar.Name = "progressBar";
-            // 
             // tableLayoutPanel4
             // 
             resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
@@ -201,6 +188,19 @@
             // notifyIcon1
             // 
             resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
+            // 
+            // progressBar
+            // 
+            resources.ApplyResources(this.progressBar, "progressBar");
+            this.progressBar.Maximum = 372;
+            this.progressBar.Name = "progressBar";
+            // 
+            // generateExcel
+            // 
+            resources.ApplyResources(this.generateExcel, "generateExcel");
+            this.generateExcel.Name = "generateExcel";
+            this.generateExcel.UseVisualStyleBackColor = true;
+            this.generateExcel.Click += new System.EventHandler(this.generateExcel_Click);
             // 
             // ExcelCalendarForm
             // 
@@ -229,10 +229,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button generateExcel;
         private System.Windows.Forms.TableLayoutPanel tableLayout;
         private System.Windows.Forms.NumericUpDown yearUpDown;
-        public System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -248,6 +246,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.CheckBox weekCheckBox;
         private System.Windows.Forms.Label label5;
+        public System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Button generateExcel;
     }
 }
 
