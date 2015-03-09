@@ -8,7 +8,7 @@ namespace ExcelCalendar
 {
     interface IPerson
     {
-        string forename { get; set; }
+        string firstname { get; set; }
         string lastname { get; set; }
         DateTime birthday { get; set; }
     }
