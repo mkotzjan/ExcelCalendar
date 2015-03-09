@@ -14,12 +14,12 @@ namespace ExcelCalendar
 {
     public partial class ExcelCalendarForm : Form
     {
-        private List<Person> persons;
+        private List<IPerson> persons;
 
         public ExcelCalendarForm()
         {
             InitializeComponent();
-            persons = new List<Person>();
+            persons = new List<IPerson>();
         }
 
         private void ExcelCalendarForm_Load(object sender, EventArgs e)
