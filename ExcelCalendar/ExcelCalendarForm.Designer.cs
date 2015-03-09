@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExcelCalendarForm));
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.weekComboBox = new System.Windows.Forms.ComboBox();
@@ -46,9 +47,8 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.weekCheckBox = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.generateExcel = new System.Windows.Forms.Button();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tableLayout.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -70,6 +70,12 @@
             this.tableLayout.Controls.Add(this.generateExcel, 0, 6);
             this.tableLayout.Name = "tableLayout";
             this.tableLayout.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayout_Paint);
+            // 
+            // progressBar
+            // 
+            resources.ApplyResources(this.progressBar, "progressBar");
+            this.progressBar.Maximum = 372;
+            this.progressBar.Name = "progressBar";
             // 
             // tableLayoutPanel5
             // 
@@ -185,22 +191,16 @@
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
             // 
-            // notifyIcon1
-            // 
-            resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
-            // 
-            // progressBar
-            // 
-            resources.ApplyResources(this.progressBar, "progressBar");
-            this.progressBar.Maximum = 372;
-            this.progressBar.Name = "progressBar";
-            // 
             // generateExcel
             // 
             resources.ApplyResources(this.generateExcel, "generateExcel");
             this.generateExcel.Name = "generateExcel";
             this.generateExcel.UseVisualStyleBackColor = true;
             this.generateExcel.Click += new System.EventHandler(this.generateExcel_Click);
+            // 
+            // notifyIcon1
+            // 
+            resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
             // 
             // ExcelCalendarForm
             // 

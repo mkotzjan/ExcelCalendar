@@ -136,7 +136,7 @@
     <value>3, 213</value>
   </data>
   <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 24</value>
+    <value>210, 27</value>
   </data>
   <data name="progressBar.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -670,7 +670,7 @@
     <value>8</value>
   </data>
   <data name="tableLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 235</value>
+    <value>216, 243</value>
   </data>
   <data name="tableLayout.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1833,6 +1833,9 @@
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>48</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
