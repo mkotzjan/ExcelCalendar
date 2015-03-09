@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExcelCalendar
 {
-    class Person : IPerson
+    public class Person : IPerson
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }

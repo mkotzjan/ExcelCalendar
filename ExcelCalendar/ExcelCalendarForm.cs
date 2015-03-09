@@ -48,7 +48,7 @@ namespace ExcelCalendar
 
                 if (saveExcel.ShowDialog() == DialogResult.OK)
                 {
-                    GenerateExcel.generate(saveExcel.FileName);
+                    GenerateExcel.generate(saveExcel.FileName, persons);
                 }
             }
         }

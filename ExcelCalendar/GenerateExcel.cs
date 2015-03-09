@@ -22,7 +22,7 @@ namespace ExcelCalendar
         private static List<Tuple<DateTime, DateTime>> holidays = new List<Tuple<DateTime, DateTime>>();
         private static int week;
 
-        public static void generate(string filePath)
+        public static void generate(string filePath, List<IPerson> persons)
         {
             DateTime startTime = DateTime.Now;
             calculateEastern(Options.year);
@@ -32,7 +32,7 @@ namespace ExcelCalendar
 
             if (xlApp == null)
             {
-                MessageBox.Show("Excel ist nicht richtig instaliert!");
+                MessageBox.Show("Excel ist nicht richtig installiert!");
                 return;
             }
 
@@ -64,7 +64,7 @@ namespace ExcelCalendar
                         setHolidays(xlWorkSheet, i, j);
                     }
                     setDaysOfMonth(xlWorkSheet, i, j);
-                    setBorders(xlWorkSheet, i, j);
+                    //setBorders(xlWorkSheet, i, j);
                     
                     if (Options.showWeek)
                     {
@@ -80,6 +80,13 @@ namespace ExcelCalendar
                     Program.form.Text = "Noch " + Convert.ToInt32(timeRemaining).ToString() + " Sekunden";
                     
                 }
+            }
+
+            foreach (var person in persons)
+            {
+                var month = person.Birthday.Month-1;
+                var day = person.Birthday.Day;
+                xlWorkSheet.Cells[day + 2, month * 4 + 3] = person.ToString();
             }
 
             xlWorkBook.SaveAs(filePath, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
