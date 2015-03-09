@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,12 @@ namespace ExcelCalendar
 {
     public partial class ExcelCalendarForm : Form
     {
+        private List<Person> persons;
+
         public ExcelCalendarForm()
         {
             InitializeComponent();
+            persons = new List<Person>();
         }
 
         private void ExcelCalendarForm_Load(object sender, EventArgs e)
@@ -91,16 +95,27 @@ namespace ExcelCalendar
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /**
-             * TODO:
-             *  1. Datei laden
-             *  2. beim Laden Zeilenweise in eine List von Person-Objekten einlesen
-             *  3. nach erfolgreichen Laden Button-Beschriftung mit Dateinamen ersetzen
-             */
             openFileDialog1.FileName = "Geburtstagsliste.csv";
             openFileDialog1.Filter = "CSV (*.csv)|*.csv";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                persons.Clear();
+
+                try
+                {
+                    var lines = File.ReadAllLines(openFileDialog1.FileName);
+                    foreach (var line in lines)
+                    {
+                        var tokens = line.Split(',');
+                        persons.Add(new Person(tokens[0], tokens[1], DateTime.Parse(tokens[2])));
+                    }
+                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ein Fehler ist aufgetreten");
+                    return;
+                }
+
                 var fileNameWithoutPath = Path.GetFileName(openFileDialog1.FileName);
                 selectBirthdayFile.Text = fileNameWithoutPath + " ausgewählt";
             }
