@@ -18,5 +18,10 @@ namespace ExcelCalendar
             this.Lastname = lastname;
             this.Birthday = birthday;
         }
+
+        public override string ToString()
+        {
+            return Firstname + " " + Lastname + ", " + Birthday.ToShortDateString();
+        }
     }
 }

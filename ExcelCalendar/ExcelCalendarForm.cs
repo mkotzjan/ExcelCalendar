@@ -87,5 +87,16 @@ namespace ExcelCalendar
         {
             Options.week = weekComboBox.SelectedIndex;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            /**
+             * TODO:
+             *  1. Datei laden
+             *  2. beim Laden Zeilenweise in eine List von Person-Objekten einlesen
+             *  3. nach erfolgreichen Laden Button-Beschriftung mit Dateinamen ersetzen
+             */
+            openFileDialog1.ShowDialog();
+        }
     }
 }

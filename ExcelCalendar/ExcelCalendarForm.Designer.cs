@@ -49,6 +49,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.generateExcel = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayout.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -68,6 +70,7 @@
             this.tableLayout.Controls.Add(this.tableLayoutPanel3, 0, 2);
             this.tableLayout.Controls.Add(this.tableLayoutPanel4, 0, 3);
             this.tableLayout.Controls.Add(this.generateExcel, 0, 6);
+            this.tableLayout.Controls.Add(this.button1, 0, 5);
             this.tableLayout.Name = "tableLayout";
             this.tableLayout.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayout_Paint);
             // 
@@ -202,6 +205,17 @@
             // 
             resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // ExcelCalendarForm
             // 
             resources.ApplyResources(this, "$this");
@@ -248,6 +262,8 @@
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Button generateExcel;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
