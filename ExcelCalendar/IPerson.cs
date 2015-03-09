@@ -8,8 +8,8 @@ namespace ExcelCalendar
 {
     interface IPerson
     {
-        string firstname { get; set; }
-        string lastname { get; set; }
-        DateTime birthday { get; set; }
+        string Firstname { get; set; }
+        string Lastname { get; set; }
+        DateTime Birthday { get; set; }
     }
 }

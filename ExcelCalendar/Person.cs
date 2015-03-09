@@ -8,15 +8,15 @@ namespace ExcelCalendar
 {
     class Person : IPerson
     {
-        public string firstname { get; set; }
-        public string lastname { get; set; }
-        public DateTime birthday { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public DateTime Birthday { get; set; }
 
         public Person(string firstname, string lastname, DateTime birthday)
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
-            this.birthday = birthday;
+            this.Firstname = firstname;
+            this.Lastname = lastname;
+            this.Birthday = birthday;
         }
     }
 }
