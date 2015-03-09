@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -96,7 +97,14 @@ namespace ExcelCalendar
              *  2. beim Laden Zeilenweise in eine List von Person-Objekten einlesen
              *  3. nach erfolgreichen Laden Button-Beschriftung mit Dateinamen ersetzen
              */
-            openFileDialog1.ShowDialog();
+            openFileDialog1.FileName = "Geburtstagsliste.csv";
+            openFileDialog1.Filter = "CSV (*.csv)|*.csv";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                var fileNameWithoutPath = Path.GetFileName(openFileDialog1.FileName);
+                selectBirthdayFile.Text = fileNameWithoutPath + " ausgewählt";
+            }
+
         }
     }
 }
