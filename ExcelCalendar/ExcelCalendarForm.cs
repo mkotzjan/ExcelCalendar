@@ -42,7 +42,7 @@ namespace ExcelCalendar
             else
             {
                 SaveFileDialog saveExcel = new SaveFileDialog();
-                saveExcel.Filter = "Excel Worksheet|*.xls";
+                saveExcel.Filter = "Excel Worksheet|*.xls|Open Office Calc|*.ods";
                 saveExcel.FilterIndex = 1;
                 saveExcel.OverwritePrompt = false;
 

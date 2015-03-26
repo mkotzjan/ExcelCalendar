@@ -48,9 +48,9 @@
             this.weekCheckBox = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.generateExcel = new System.Windows.Forms.Button();
+            this.selectBirthdayFile = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.selectBirthdayFile = new System.Windows.Forms.Button();
             this.tableLayout.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -201,6 +201,13 @@
             this.generateExcel.UseVisualStyleBackColor = true;
             this.generateExcel.Click += new System.EventHandler(this.generateExcel_Click);
             // 
+            // selectBirthdayFile
+            // 
+            resources.ApplyResources(this.selectBirthdayFile, "selectBirthdayFile");
+            this.selectBirthdayFile.Name = "selectBirthdayFile";
+            this.selectBirthdayFile.UseVisualStyleBackColor = true;
+            this.selectBirthdayFile.Click += new System.EventHandler(this.button1_Click);
+            // 
             // notifyIcon1
             // 
             resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
@@ -208,13 +215,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // selectBirthdayFile
-            // 
-            resources.ApplyResources(this.selectBirthdayFile, "selectBirthdayFile");
-            this.selectBirthdayFile.Name = "selectBirthdayFile";
-            this.selectBirthdayFile.UseVisualStyleBackColor = true;
-            this.selectBirthdayFile.Click += new System.EventHandler(this.button1_Click);
             // 
             // ExcelCalendarForm
             // 
