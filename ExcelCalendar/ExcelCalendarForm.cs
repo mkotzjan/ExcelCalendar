@@ -16,6 +16,7 @@ namespace ExcelCalendar
     public partial class ExcelCalendarForm : Form
     {
         private List<IPerson> persons;
+        private IGenerate generate;
 
         public ExcelCalendarForm()
         {
@@ -49,7 +50,7 @@ namespace ExcelCalendar
 
                 if (saveExcel.ShowDialog() == DialogResult.OK)
                 {
-                    GenerateExcel.generate(saveExcel.FileName, persons);
+                    generate = new GenerateExcel(saveExcel.FileName, persons);
                 }
             }
         }
