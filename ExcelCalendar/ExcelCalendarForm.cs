@@ -50,7 +50,14 @@ namespace ExcelCalendar
 
                 if (saveExcel.ShowDialog() == DialogResult.OK)
                 {
-                    generate = new GenerateExcel(saveExcel.FileName, persons);
+                    if (saveExcel.FileName.EndsWith(".xls"))
+                    {
+                        generate = new GenerateExcel(saveExcel.FileName, persons);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Noch nicht implementiert!");
+                    }
                 }
             }
         }
