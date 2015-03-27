@@ -13,7 +13,7 @@ using ExcelCalendar.Interfaces;
 
 namespace ExcelCalendar
 {
-    public static class GenerateExcel
+    public class GenerateExcel : IGenerate
     {
         private static string[] months = new string[12] {"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" };
         private static int easterMonth;
@@ -23,7 +23,7 @@ namespace ExcelCalendar
         private static List<Tuple<DateTime, DateTime>> holidays = new List<Tuple<DateTime, DateTime>>();
         private static int week;
 
-        public static void generate(string filePath, List<IPerson> persons)
+        public GenerateExcel(string filePath, List<IPerson> persons)
         {
             DateTime startTime = DateTime.Now;
             calculateEastern(Options.year);
@@ -104,7 +104,7 @@ namespace ExcelCalendar
             }
         }
 
-        private static void releaseObject(object obj)
+        private void releaseObject(object obj)
         {
             try
             {
@@ -122,20 +122,20 @@ namespace ExcelCalendar
             }
         }
 
-        private static void setTitle(Excel.Worksheet xlWorkSheet)
+        private void setTitle(Excel.Worksheet xlWorkSheet)
         {
             xlWorkSheet.Cells[1, 1] = "Kalender " + Options.year.ToString();
             xlWorkSheet.Cells[1, 1].Font.Size = 30;
             xlWorkSheet.Range[xlWorkSheet.Cells[1, 1], xlWorkSheet.Cells[1, 48]].Merge();
         }
 
-        private static void setMonths(Excel.Worksheet xlWorkSheet, int i)
+        private void setMonths(Excel.Worksheet xlWorkSheet, int i)
         {
             xlWorkSheet.Range[xlWorkSheet.Cells[2, (i * 4) + 1], xlWorkSheet.Cells[2, (i + 1) * 4]].Merge();
             xlWorkSheet.Cells[2, (i * 4) + 1] = months[i];
         }
 
-        private static void setBorders(Excel.Worksheet xlWorkSheet, int i, int j)
+        private void setBorders(Excel.Worksheet xlWorkSheet, int i, int j)
         {
             xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlInsideVertical].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
             xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlInsideHorizontal].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
@@ -143,7 +143,7 @@ namespace ExcelCalendar
             xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i + 1) * 4]].Borders[Excel.XlBordersIndex.xlDiagonalDown].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
         }
 
-        private static void setDaysOfMonth(Excel.Worksheet xlWorkSheet, int i, int j)
+        private void setDaysOfMonth(Excel.Worksheet xlWorkSheet, int i, int j)
         {
             int daysCount = System.DateTime.DaysInMonth(Options.year, i + 1);
 
@@ -177,7 +177,7 @@ namespace ExcelCalendar
             xlWorkSheet.Columns[(i * 4) + 4].AutoFit();
         }
 
-        private static int getWeekNumber(int i, int j)
+        private int getWeekNumber(int i, int j)
         {
             DateTime time = new DateTime(Options.year, i + 1, j);
             DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
@@ -189,7 +189,7 @@ namespace ExcelCalendar
             return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
         }
 
-        private static void calculateEastern(int year)
+        private void calculateEastern(int year)
         {
             int g = year % 19;
             int c = year / 100;
@@ -211,7 +211,7 @@ namespace ExcelCalendar
             easterMonth = month;
             easterDay = day;
         }
-        private static void setFeastDays(Excel.Worksheet xlWorkSheet, int i, int j)
+        private void setFeastDays(Excel.Worksheet xlWorkSheet, int i, int j)
         {
             if (i == 0 && j == 1)
             {
@@ -292,7 +292,7 @@ namespace ExcelCalendar
             }
         }
 
-        private static void getHolidays()
+        private void getHolidays()
         {
             if (year != Options.year)
             {
@@ -313,7 +313,7 @@ namespace ExcelCalendar
             year = Options.year;
         }
 
-        private static void convertToDate(string rawDate)
+        private void convertToDate(string rawDate)
         {
             string[] splitDate = rawDate.Split(new Char[] { '.', ' '});
             DateTime startDay = new DateTime(Convert.ToInt32("20" + splitDate[2]), Convert.ToInt32(splitDate[1]), Convert.ToInt32(splitDate[0]));
@@ -321,7 +321,7 @@ namespace ExcelCalendar
             holidays.Add(new Tuple<DateTime,DateTime> (startDay, endDay));
         }
 
-        private static void setHolidays(Excel.Worksheet xlWorkSheet, int i, int j)
+        private void setHolidays(Excel.Worksheet xlWorkSheet, int i, int j)
         {
             try
             {
@@ -340,7 +340,7 @@ namespace ExcelCalendar
             }
         }
 
-        private static void setWeek(Excel.Worksheet xlWorkSheet, int i, int j)
+        private void setWeek(Excel.Worksheet xlWorkSheet, int i, int j)
         {
             try
             {
