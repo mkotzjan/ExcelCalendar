@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IGenerate.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="ExcelCalendarForm.cs">
       <SubType>Form</SubType>
@@ -52,7 +53,7 @@
       <DependentUpon>ExcelCalendarForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GenerateExcel.cs" />
-    <Compile Include="IPerson.cs" />
+    <Compile Include="Interfaces\IPerson.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
