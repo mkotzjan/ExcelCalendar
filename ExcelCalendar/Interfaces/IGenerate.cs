@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExcelCalendar.Interfaces
 {
-    public interface IGenerate
+    public class IGenerate
     {
 
     }
