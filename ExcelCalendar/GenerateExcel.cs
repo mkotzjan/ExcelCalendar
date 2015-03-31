@@ -177,18 +177,6 @@ namespace ExcelCalendar
             xlWorkSheet.Columns[(i * 4) + 4].AutoFit();
         }
 
-        private int getWeekNumber(int i, int j)
-        {
-            DateTime time = new DateTime(Options.year, i + 1, j);
-            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
-            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
-            {
-                time = time.AddDays(3);
-            }
-
-            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-        }
-
         private void calculateEastern(int year)
         {
             int g = year % 19;
