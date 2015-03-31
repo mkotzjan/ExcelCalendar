@@ -9,7 +9,7 @@ namespace ExcelCalendar.Interfaces
 {
     public class IGenerate
     {
-        private int getWeekNumber(int i, int j)
+        public int getWeekNumber(int i, int j)
         {
             DateTime time = new DateTime(Options.year, i + 1, j);
             DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
