@@ -15,14 +15,6 @@ namespace ExcelCalendar
 {
     public class GenerateExcel : IGenerate
     {
-        private static string[] months = new string[12] {"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" };
-        private static int easterMonth;
-        private static int easterDay;
-        private static int year;
-        private static string website;
-        private static List<Tuple<DateTime, DateTime>> holidays = new List<Tuple<DateTime, DateTime>>();
-        private static int week;
-
         public GenerateExcel(string filePath, List<IPerson> persons)
         {
             DateTime startTime = DateTime.Now;
@@ -177,28 +169,6 @@ namespace ExcelCalendar
             xlWorkSheet.Columns[(i * 4) + 4].AutoFit();
         }
 
-        private void calculateEastern(int year)
-        {
-            int g = year % 19;
-            int c = year / 100;
-            int h = h = (c - (int)(c / 4) - (int)((8 * c + 13) / 25)
-                                                + 19 * g + 15) % 30;
-            int i = h - (int)(h / 28) * (1 - (int)(h / 28) *
-                        (int)(29 / (h + 1)) * (int)((21 - g) / 11));
-
-            int day = i - ((year + (int)(year / 4) +
-                          i + 2 - c + (int)(c / 4)) % 7) + 28;
-            int month = 3;
-
-            if (day > 31)
-            {
-                month++;
-                day -= 31;
-            }
-
-            easterMonth = month;
-            easterDay = day;
-        }
         private void setFeastDays(Excel.Worksheet xlWorkSheet, int i, int j)
         {
             if (i == 0 && j == 1)
@@ -278,35 +248,6 @@ namespace ExcelCalendar
                 xlWorkSheet.Cells[2 + j, (i * 4) + 3].Font.Size = 6;
                 xlWorkSheet.Range[xlWorkSheet.Cells[2 + j, (i * 4) + 1], xlWorkSheet.Cells[2 + j, (i * 4) + 4]].Interior.ColorIndex = 53;
             }
-        }
-
-        private void getHolidays()
-        {
-            if (year != Options.year)
-            {
-                WebClient w = new WebClient();
-                string url = "http://www.kalenderpedia.de/ferien/ferien-baden-wuerttemberg-" + Options.year + ".html";
-                website = w.DownloadString(url);
-
-                MatchCollection matchCollection = Regex.Matches(website, @">([\d]+\.[\d]+\.[\d]+\s-\s[\d]+\.[\d]+\.[\d]+)<\/td>",
-                RegexOptions.Singleline);
-
-                foreach (Match m in matchCollection)
-                {
-                    convertToDate(m.Groups[1].ToString());
-                }
-
-            }
-
-            year = Options.year;
-        }
-
-        private void convertToDate(string rawDate)
-        {
-            string[] splitDate = rawDate.Split(new Char[] { '.', ' '});
-            DateTime startDay = new DateTime(Convert.ToInt32("20" + splitDate[2]), Convert.ToInt32(splitDate[1]), Convert.ToInt32(splitDate[0]));
-            DateTime endDay = new DateTime(Convert.ToInt32("20" + splitDate[6]), Convert.ToInt32(splitDate[5]), Convert.ToInt32(splitDate[4]));
-            holidays.Add(new Tuple<DateTime,DateTime> (startDay, endDay));
         }
 
         private void setHolidays(Excel.Worksheet xlWorkSheet, int i, int j)
